@@ -54,6 +54,7 @@
         }
         table {
             width: 100%;
+            font-size: 10px; /* تم تصغير حجم الخط */
             border-collapse: collapse;
             margin-top: 15px;
             table-layout: fixed;
@@ -62,7 +63,7 @@
             border: 1px solid #ddd;
         }
         th, td {
-            padding: 10px;
+            padding: 5px; /* تم تصغير الهوامش الداخلية */
             text-align: center;
             word-wrap: break-word;
         }
@@ -96,10 +97,8 @@
 </head>
 <body>
 
-
 <div class="container">
     <h1>استبيان قطاع ادارة أصول التوزيع</h1>
-
 
     <!-- شاشة ترحيبية -->
     <div id="welcome-screen" style="display: block;">
@@ -108,10 +107,8 @@
         <button onclick="startSurvey()" class="submit-button">ابدأ الاستبيان</button>
     </div>
 
-
     <!-- Formspree action for submission -->
     <form id="surveyForm" action="https://formspree.io/f/xpwlnpdb" method="POST" style="display: none;">
-
 
     <!-- القسم 1: معلومات أساسية -->
     <div id="section-معلومات-أساسية" class="section">
@@ -243,7 +240,6 @@
             </table>
         </div>
     </div>
-
 
     <!-- القسم 3: أعمال صيانة الشبكات والمعدات -->
     <div id="section-أعمال-صيانة-الشبكات-والمعدات" class="section">
@@ -402,7 +398,7 @@
             </table>
         </div>
     </div>
-    
+
     <!-- القسم 4: جودة أعمال تشغيل الشبكة والمعدات -->
     <div id="section-جودة-أعمال-تشغيل-الشبكة-والمعدات" class="section">
         <h2>جودة أعمال تشغيل الشبكة والمعدات</h2>
@@ -1194,13 +1190,19 @@
             </table>
         </div>
     </div>
-
+    
+    <!-- القسم الأخير: تعليقات -->
+    <div id="section-تعليقات-عامة" class="section" style="display: block;">
+        <h2>نسعد بإضافة مرئياتكم لتحسين خدمات قطاع ادارة الأصول</h2>
+        <div class="form-group">
+            <textarea id="comments" name="التعليقات" rows="5" placeholder="اكتب تعليقاتك هنا..."></textarea>
+        </div>
+    </div>
 
     <!-- زر الإرسال -->
     <button type="submit" class="submit-button">إرسال الاستبيان</button>
     </form>
 </div>
-
 
 <script>
     function showRelevantSections() {
@@ -1209,11 +1211,10 @@
         
         // إخفاء جميع الأقسام ما عدا القسم الأول
         allSections.forEach(section => {
-            if (section.id !== 'section-معلومات-أساسية') {
+            if (section.id !== 'section-معلومات-أساسية' && section.id !== 'section-تعليقات-عامة') {
                 section.style.display = 'none';
             }
         });
-
 
         // إظهار الأقسام المناسبة بناءً على القيمة المختارة
         if (jobRole === 'عمليات') {
@@ -1231,7 +1232,6 @@
         }
     }
 
-
     // A helper function to show sections based on their IDs
     function showSections(sectionIds) {
         sectionIds.forEach(id => {
@@ -1246,15 +1246,16 @@
         document.getElementById('welcome-screen').style.display = 'none';
         document.getElementById('surveyForm').style.display = 'block';
         document.getElementById('section-معلومات-أساسية').style.display = 'block';
+        
+        // Show the comments section by default
+        document.getElementById('section-تعليقات-عامة').style.display = 'block';
     }
 
-
-    // Initially show the basic info section
+    // Initially show the welcome screen
     document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('welcome-screen').style.display = 'block';
     });
 </script>
-
 
 </body>
 </html>
